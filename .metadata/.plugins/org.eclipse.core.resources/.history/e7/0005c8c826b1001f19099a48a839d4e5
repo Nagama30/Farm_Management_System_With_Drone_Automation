@@ -1,0 +1,5 @@
+#visualizationPane {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-background-color: #f0f0f0; 
+}

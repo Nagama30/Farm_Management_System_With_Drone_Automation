@@ -1,0 +1,23 @@
+#visualizationPane {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-background-color: #f0f0f0; 
+}
+
+.root {
+    -fx-background-image: url("background.png");
+    /*-fx-background-repeat: no-repeat;*/
+    /*-fx-background-position: center;*/
+    -fx-background-size: cover; /* Ensures the image fits the entire region */
+    -fx-opacity: 0.9; /* Adjust opacity of the background image */
+}
+
+.label {
+    -fx-font-weight: bold; /* Makes the text bold */
+    /*-fx-font-size: 13px;*/   /* Sets the font size to 16 pixels */
+}
+
+/* Bold text for any control (generic rule) */
+* {
+    -fx-font-weight: bold;
+}

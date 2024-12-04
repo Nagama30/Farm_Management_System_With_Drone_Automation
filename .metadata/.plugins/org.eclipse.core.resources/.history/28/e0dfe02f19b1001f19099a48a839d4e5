@@ -1,0 +1,45 @@
+package application;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class DashboardManager {
+    private static DashboardManager instance; // The single instance of DashboardManager
+    private Stage dashboardStage; // The single stage for the dashboard
+
+    private DashboardManager() {
+        // Private constructor prevents external instantiation
+    }
+
+    public static DashboardManager getInstance() {
+        if (instance == null) {
+            instance = new DashboardManager();
+        }
+        return instance;
+    }
+
+    public void showDashboard() {
+        if (dashboardStage != null && dashboardStage.isShowing()) {
+            dashboardStage.toFront();
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScene.fxml"));
+            Parent root = loader.load();
+
+            dashboardStage = new Stage();
+            dashboardStage.setTitle("Farm Management Dashboard");
+            Scene scene = new Scene(root, 1200, 800);
+            dashboardStage.setScene(scene);
+
+            dashboardStage.setOnCloseRequest(event -> dashboardStage = null);
+
+            dashboardStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

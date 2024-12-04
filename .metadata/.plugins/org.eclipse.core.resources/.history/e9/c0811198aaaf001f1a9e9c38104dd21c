@@ -1,0 +1,100 @@
+package application;
+
+import javafx.animation.PathTransition;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
+import javafx.util.Duration;
+
+public class DroneAnimation {
+    private ImageView drone;
+    private Label droneLabel;
+    private Pane visualizationPane;
+
+    public DroneAnimation(Pane visualizationPane) {
+        this.visualizationPane = visualizationPane;
+
+        // Load the drone image
+        Image droneImage = new Image(getClass().getResourceAsStream("drone.png"));
+        drone = new ImageView(droneImage);
+        drone.setFitWidth(50); // Set the width of the image
+        drone.setFitHeight(50); // Set the height of the image
+        drone.setLayoutX(30); // Initial base X position
+        drone.setLayoutY(30); // Initial base Y position
+        
+     // Add the label above the drone
+        droneLabel = new Label("Drone");
+        droneLabel.setLayoutX(drone.getLayoutX() + 10); // Position label above the drone
+        droneLabel.setLayoutY(drone.getLayoutY() - 20); // Offset label above the image
+
+        // Add the drone and label to the visualization pane
+        visualizationPane.getChildren().addAll(drone, droneLabel);
+    }
+
+    public void visit(double x, double y) {
+        // Clamp the target position to stay within the bounds of the pane
+        double hoverX = clamp(x, 0, visualizationPane.getPrefWidth() - drone.getFitWidth());
+        double hoverY = clamp(y, 0, visualizationPane.getPrefHeight() - drone.getFitHeight());
+
+        // Bring the drone to the front
+        drone.toFront();
+
+        // Create a path from the current position to the target position
+        Line path = new Line(drone.getLayoutX(), drone.getLayoutY(), hoverX, hoverY);
+        PathTransition transition = new PathTransition(Duration.seconds(2), path, drone);
+
+        /*// Ensure the drone's position is updated when the animation finishes
+        transition.setOnFinished(event -> {
+            // Update the drone's layout coordinates to match the target position
+            drone.setLayoutX(hoverX);
+            drone.setLayoutY(hoverY);
+        });*/
+
+        // Play the transition animation
+        transition.play();
+    }
+
+
+    public void returnToBase() {
+        double baseX = 30; // Original X position
+        double baseY = 30; // Original Y position
+
+        drone.setVisible(true);
+        drone.toFront(); // Ensure it's in front of all other elements.
+        drone.getTransforms().clear(); // Reset any applied transformations.
+        Line path = new Line(drone.getLayoutX(), drone.getLayoutY(), baseX, baseY);
+        PathTransition transition = new PathTransition(Duration.seconds(2), path, drone);
+
+        
+        // Update the drone's position when the animation finishes
+        transition.setOnFinished(event -> {
+            // Ensure the layout is updated to the base position
+            drone.setLayoutX(baseX);
+            drone.setLayoutY(baseY);
+        });
+        
+        transition.play();
+        System.out.println("Drone visibility: " + drone.isVisible());
+        System.out.println("Drone position: (" + drone.getLayoutX() + ", " + drone.getLayoutY() + ")");
+        System.out.println("Drone opacity: " + drone.getOpacity());
+        System.out.println("Drone parent: " + (drone.getParent() != null ? "Present" : "Absent"));
+        System.out.println("Drone bounds: " + drone.getBoundsInParent());
+    }
+
+    
+    public double getDroneWidth() {
+        return drone.getFitWidth();
+    }
+
+    public double getDroneHeight() {
+        return drone.getFitHeight();
+    }
+    
+    
+    
+    private double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
+    }
+}

@@ -1,0 +1,54 @@
+package application;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class DashboardManager {
+    private static DashboardManager instance; // The singleton instance
+    private Stage dashboardStage; // The single stage for the dashboard
+
+    // Private constructor to prevent external instantiation
+    private DashboardManager() {}
+
+    // Method to get the singleton instance of DashboardManager
+    public static synchronized DashboardManager getInstance() {
+        if (instance == null) {
+            instance = new DashboardManager();
+        }
+        return instance;
+    }
+
+    // Method to show the dashboard
+    public synchronized void showDashboard() {
+        // Check if the dashboardStage is already open
+        if (dashboardStage != null && dashboardStage.isShowing()) {
+            dashboardStage.toFront(); // Bring the existing stage to the front
+            return;
+        }
+
+        try {
+            // Load the dashboard only if not already open
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScene.fxml"));
+            Parent root = loader.load();
+
+            dashboardStage = new Stage();
+            dashboardStage.setTitle("Farm Management Dashboard");
+            Scene scene = new Scene(root, 1200, 800);
+            dashboardStage.setScene(scene);
+
+            // Handle stage closing to reset the instance
+            dashboardStage.setOnCloseRequest(event -> dashboardStage = null);
+            
+            dashboardStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

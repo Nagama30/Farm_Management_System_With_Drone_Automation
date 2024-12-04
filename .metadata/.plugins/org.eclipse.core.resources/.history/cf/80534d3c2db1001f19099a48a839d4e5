@@ -1,0 +1,29 @@
+#visualizationPane {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-background-color: white ;
+}
+
+.root {
+    -fx-background-image: url("Dashboard_Background.jpg");
+    -fx-background-repeat: repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover; /* Ensures the image fits the entire region */
+    -fx-opacity: 0.9; /* Adjust opacity of the background image */
+    -fx-background-position: right center; /* Shifts the background image to the right */
+}
+
+.label {
+    -fx-font-weight: bold; /* Makes the text bold */
+    /*-fx-font-size: 13px;*/   /* Sets the font size to 16 pixels */
+}
+
+/* Bold text for any control (generic rule) */
+* {
+    -fx-font-weight: bold;
+}
+
+.button {
+	-fx-background-color: #3498db; /* Button background color */
+    -fx-text-fill: white; /* Button text color */
+}

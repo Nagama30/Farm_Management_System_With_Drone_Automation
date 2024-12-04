@@ -1,0 +1,47 @@
+package application;
+
+import javafx.animation.PathTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
+import javafx.util.Duration;
+
+public class DroneAnimation {
+    private ImageView drone;
+    private Pane visualizationPane;
+
+    public DroneAnimation(Pane visualizationPane) {
+        this.visualizationPane = visualizationPane;
+
+        // Load the drone image
+        Image droneImage = new Image(getClass().getResourceAsStream("/path/to/drone.png"));
+        drone = new ImageView(droneImage);
+        drone.setFitWidth(30); // Set the width of the image
+        drone.setFitHeight(30); // Set the height of the image
+        drone.setLayoutX(50); // Initial base X position
+        drone.setLayoutY(50); // Initial base Y position
+        visualizationPane.getChildren().add(drone);
+    }
+
+    public void visit(double x, double y) {
+        double hoverX = clamp(x, 0, visualizationPane.getPrefWidth() - drone.getFitWidth());
+        double hoverY = clamp(y, 0, visualizationPane.getPrefHeight() - drone.getFitHeight());
+
+        Line path = new Line(drone.getLayoutX(), drone.getLayoutY(), hoverX, hoverY);
+        PathTransition transition = new PathTransition(Duration.seconds(2), path, drone);
+        transition.setOnFinished(event -> {
+            drone.setLayoutX(hoverX);
+            drone.setLayoutY(hoverY);
+        });
+        transition.play();
+    }
+
+    public void returnToBase() {
+        visit(50, 50); // Return to the base position
+    }
+
+    private double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
+    }
+}

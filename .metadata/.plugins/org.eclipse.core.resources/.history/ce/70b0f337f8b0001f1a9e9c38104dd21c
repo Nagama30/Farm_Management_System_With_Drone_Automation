@@ -1,0 +1,32 @@
+package application;
+import javafx.stage.Stage;
+
+public class DashboardManager {
+    private static Stage dashboardStage;
+
+    public static void showDashboard() {
+        if (dashboardStage == null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(DashboardManager.class.getResource("Dashboard.fxml"));
+                Parent root = loader.load();
+
+                dashboardStage = new Stage();
+                dashboardStage.setTitle("Dashboard");
+                dashboardStage.setScene(new Scene(root));
+                
+                // Reset the reference when the window is closed
+                dashboardStage.setOnCloseRequest(e -> dashboardStage = null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        // Show the dashboard if it's not already showing
+        if (!dashboardStage.isShowing()) {
+            dashboardStage.show();
+        } else {
+            // Bring the dashboard to the front if it's already open
+            dashboardStage.toFront();
+        }
+    }
+}

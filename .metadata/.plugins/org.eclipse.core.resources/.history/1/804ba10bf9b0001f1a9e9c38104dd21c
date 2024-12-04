@@ -1,0 +1,44 @@
+package application;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        /*try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScene.fxml"));
+            Parent root = loader.load();
+            primaryStage.setTitle("Farm Management Dashboard");
+
+            // Set a larger initial scene size to fit all elements
+            Scene scene = new Scene(root, 1200, 800); // Adjust width and height as needed
+            primaryStage.setScene(scene);
+
+            // Set minimum size to prevent shrinking below usable dimensions
+            primaryStage.setMinWidth(1000);
+            primaryStage.setMinHeight(700);
+
+            // Optionally, set a maximum size
+            primaryStage.setMaxWidth(1600);
+            primaryStage.setMaxHeight(1000);
+
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+    	
+    	
+    	// Method to be called when you need to open the dashboard
+        public void openDashboard() {
+            DashboardManager.showDashboard();
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
