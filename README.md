@@ -19,35 +19,36 @@ A Farm Management System (FMS) using drones integrates advanced technologies lik
 
 ## Project Structure
 The project is organized as follows:
-Root
-├── bin/
-│   └── application/
-│       ├── application.css
-│       ├── background.png
-│       ├── Dashboard_Background.jpg
-│       ├── drone.jpg
-│       ├── drone.png
-│       ├── DroneAnimation.class
-│       ├── FarmItem.class
-│       ├── Item.class
-│       ├── ItemContainer.class
-│       ├── Main.class
-│       ├── MainController.class
-│       ├── MainScene.fxml
-├── src/
-│   └── application/
-│       ├── application.css
-│       ├── background.png
-│       ├── Dashboard_Background.jpg
-│       ├── drone.jpg
-│       ├── drone.png
-│       ├── DroneAnimation.java
-│       ├── FarmItem.java
-│       ├── Item.java
-│       ├── ItemContainer.java
-│       ├── Main.java
-│       ├── MainController.java
-│       ├── MainScene.fxml
+- **Root**
+  - **bin/**
+    - **application/**
+      - `application.css`
+      - `background.png`
+      - `Dashboard_Background.jpg`
+      - `drone.jpg`
+      - `drone.png`
+      - `DroneAnimation.class`
+      - `FarmItem.class`
+      - `Item.class`
+      - `ItemContainer.class`
+      - `Main.class`
+      - `MainController.class`
+      - `MainScene.fxml`
+  - **src/**
+    - **application/**
+      - `application.css`
+      - `background.png`
+      - `Dashboard_Background.jpg`
+      - `drone.jpg`
+      - `drone.png`
+      - `DroneAnimation.java`
+      - `FarmItem.java`
+      - `Item.java`
+      - `ItemContainer.java`
+      - `Main.java`
+      - `MainController.java`
+      - `MainScene.fxml`
+
 
 ## Requirements
 - **Java Development Kit (JDK)** version 8 or later.
