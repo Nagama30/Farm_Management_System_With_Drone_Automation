@@ -54,7 +54,7 @@ The project is organized as follows:
 - **Java Development Kit (JDK)** version 8 or later.
 - **Eclipse IDE**
 - **JavaFX SDK** for UI components.
-- 
+  
 
 ## Link to Git repository
 1. Clone the repository:
